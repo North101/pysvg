@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "pysvg"
+version = "0.1.0"
+description = ""
+authors = ["North101"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/North101/pysvg"
+repository = "https://github.com/North101/pysvg"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+multi_line_output=3
+include_trailing_comma=true
+
+[tool.autopep8]
+indent_size = 2
+max_line_length = 120
