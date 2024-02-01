@@ -64,7 +64,7 @@ class d(Attribute, DrawSegment):
   @property
   def width(self):
     x = 0.0
-    widths: set[float] = set()
+    widths = set[float]()
     for value in self.flat_values:
       widths.add(x)
       x = value.abs_x(x)
@@ -75,7 +75,7 @@ class d(Attribute, DrawSegment):
   @property
   def height(self):
     y = 0.0
-    heights: set[float] = set()
+    heights = set[float]()
     for value in self.flat_values:
       heights.add(y)
       y = value.abs_y(y)
@@ -115,6 +115,9 @@ class d(Attribute, DrawSegment):
 
     def __format__(self, format_spec):
       return f'm {self.x:{format_spec}} {self.y:{format_spec}}'
+
+    def __neg__(self):
+      return d.m(-self.x, -self.y)
 
     @property
     def rel_x(self):
@@ -163,6 +166,25 @@ class d(Attribute, DrawSegment):
     @property
     def rel_x(self):
       return self.value
+
+  class l(DrawSegment):
+    def __init__(self, x: float, y: float):
+      self.x = x
+      self.y = y
+
+    def __neg__(self):
+      return d.l(-self.x, -self.y)
+
+    def __format__(self, format_spec):
+      return f'l {self.x:{format_spec}} {self.y:{format_spec}}'
+
+    @property
+    def rel_x(self):
+      return self.x
+
+    @property
+    def rel_y(self):
+      return self.y
 
   class c(DrawSegment):
     def __init__(self, dx1: float, dy1: float, dx2: float, dy2: float, dx: float, dy: float):
