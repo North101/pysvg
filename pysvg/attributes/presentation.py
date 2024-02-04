@@ -209,6 +209,30 @@ class d(Attribute, DrawSegment):
     def rel_y(self):
       return self.dy
 
+  class a(DrawSegment):
+    def __init__(self, rx: float, ry: float, x_axis_rotation: float, large_arc_flag: bool, sweep_flag: bool, dx: float, dy: float):
+      self.rx = rx
+      self.ry = ry
+      self.x_axis_rotation = x_axis_rotation
+      self.large_arc_flag = large_arc_flag
+      self.sweep_flag = sweep_flag
+      self.dx = dx
+      self.dy = dy
+
+    def __neg__(self):
+      return d.a(self.rx, self.ry, self.x_axis_rotation, self.large_arc_flag, self.sweep_flag, -self.dx, -self.dy)
+
+    def __format__(self, format_spec):
+      return f'a {self.rx:{format_spec}} {self.ry:{format_spec}} {self.x_axis_rotation} {1 if self.large_arc_flag else 0} {1 if self.sweep_flag else 0} {self.dx:{format_spec}} {self.dy:{format_spec}}'
+
+    @property
+    def rel_x(self):
+      return self.dx
+
+    @property
+    def rel_y(self):
+      return self.dy
+
   class z(DrawSegment):
     def __neg__(self):
       return self
