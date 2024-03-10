@@ -1,9 +1,10 @@
 from dataclasses import dataclass
+from typing import Sequence
 
 from .base import Attributes
 
 
 @dataclass
 class StylingAttributes(Attributes):
-  class_: str | list[str] | None = None
-  style: str | list[str] | None = None
+  class_: str | Sequence[str] | None = None
+  style: str | Sequence[str] | None = None

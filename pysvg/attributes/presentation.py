@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from functools import reduce
-from typing import Callable, Literal
+from typing import Callable, Literal, Sequence
 
 from ..types import color, length_percentage, percentage, transform
 from .base import Attribute, Attributes
@@ -32,7 +32,7 @@ class DrawSegment:
 class d(Attribute, DrawSegment):
   sep = ' '
 
-  def __init__(self, value: list[DrawSegment]):
+  def __init__(self, value: Sequence[DrawSegment]):
     self.value = value
 
   def __format__(self, format_spec):
@@ -43,7 +43,7 @@ class d(Attribute, DrawSegment):
     return f'{self.sep.join(value)}'
 
   def __add__(self, other: 'd'):
-    return d(self.value + other.value)
+    return d([*self.value, *other.value])
 
   def __sub__(self, other: 'd'):
     return self + -other
@@ -281,7 +281,6 @@ class PresentationAttributes(Attributes):
   # filter: <FuncIRI> | none | inherit | None = None
   flood_color: color | None = None
   flood_opacity: float | percentage | None = None
-  transform: 'transform | list[transform] | None' = None
   stroke: paint | None = None
   # stroke_dasharray: none | <dasharray> | None = None
   stroke_dashoffset: length_percentage | None = None
@@ -290,3 +289,4 @@ class PresentationAttributes(Attributes):
   stroke_miterlimit: float | None = None
   stroke_opacity: float | percentage | None = None
   stroke_width: length_percentage | None = None
+  transform: 'transform | Sequence[transform] | None' = None

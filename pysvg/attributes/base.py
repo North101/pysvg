@@ -1,4 +1,5 @@
 from dataclasses import asdict, dataclass
+from typing import Sequence
 
 
 def _dict_factory(x):
@@ -28,7 +29,7 @@ def format_attr(key: str, value, format_spec: str, namespace: str | None = None)
 
 
 def format_attr_value(value, format_spec):
-  if isinstance(value, list | tuple | set):
+  if isinstance(value, list | tuple):
     return ' '.join((
         format_attr_value(v, format_spec)
         for v in value
